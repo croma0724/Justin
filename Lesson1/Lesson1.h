@@ -1,12 +1,17 @@
+/****************************************************
+ * 
+ * Display current time interface like in C language 
+ *
+ ***************************************************/
 #pragma once
-
-#ifndef LESSON1_H_
-#define	LESSON1_H_
+#ifndef LESSON11_H_
+#define	LESSON11_H_
 
 #include <string>
 #include <ctime>
 using namespace std;
 
+// Max buffer size.
 #define BUFSZ 128
 
 const string Msg("Hello World, time ");
