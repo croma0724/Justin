@@ -8,3 +8,15 @@ Objectives:  display the time
 Getting time:
             time elapsed in seconds   
    time()   -----------------------> ctime_s() =>  "Sun Apr 12 09:28:52 2026"
+   
+   
+Questions:
+1.  Display current time + 1 hour
+    Display current time - 1 hour 
+    Display current time + 1 day
+    Display current time - 1 day
+    Display current time + 1 week
+    Display current time - 1 week
+	
+	
+
