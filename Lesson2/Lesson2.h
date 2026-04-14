@@ -1,5 +1,5 @@
 /******************************************************
- * Lesson2.h:   first degree equation
+ * Lesson2.h:   first degree equation (FDEq)
  *
  *  Solve equation:
  *      ax + b = 0    => 
@@ -21,35 +21,50 @@ typedef struct FDEqParams {
 } FDEqParams;
 
 
-// populateFDEqParams:  populate FDEqParams structure from console
-// @output: p, structure address
-// @return: true: completed ok
-//          false: failed, a = 0 or didn't complete 
-//
-void populateFDEqParams(FDEqParams* pparam);
+class FDEq {
+public:
+  // Constructor, populate object from arguments
+  // @input:  a, b, FDE params
+  //
+  FDEq(float a, float b);
+  
+  // Constructor, populate object from console
+  FDEq(void);
 
-// validateFDEqParams:  validate a != 0
-// @input: p, structure 
-// @return: true: valid
-//          false: invalid
-//
-bool validateFDEqParams(FDEqParams param);
+  // setFDEq:  udpate FDEqParams struct from arguments
+  // @input: a, b. new params
+  // @return
+  //
+  void setFDEq(float a, float b);
+  
+  // setFDEq:  udpate FDEqParams struct from console
+  // @return
+  //
+  void setFDEqTerm();
 
-// calculateRootFirstDegreeEq: calculate first degree equation
-// @input:  param, equation parameters
-// @output: proot or 0 when root invalid
-// @return: true, <proot> contains the root
-//          false: invalid structure
-//
-bool calculateRootFirstDegreeEq(float* proot, FDEqParams param);
+  // calculateFDEroot: calculate root
+  // @return:  root or error string
+  //
+  string calculateFDEroot();
 
-// displayEquationByParam:  display equation like:
-//      aX + b = 0
-// @input: param, eq parameteres
-// return: <param> valid:     Equation a * X + b = 0 root: 
-//         <param> invalid:   Equation a * X + b = 0, parameters {a, b} invalid 
-//         false: invalid argument <param>
-//
-string displayEquationByParam(FDEqParams param);
+protected:
+  // isValidFDEqParams:  validate a != 0
+  // @input: p, structure 
+  // @return: true: valid
+  //          false: invalid
+  //
+  bool isValidFDEqParams(FDEqParams& param) const;
+
+  // displayFDEq:  display equation like:
+  //      aX + b = 0
+  // @input: param, eq parameteres
+  // return:  "Equation a * X + b = 0." 
+  //
+  string displayFDEq() const;
+
+private:
+  FDEqParams params;
+  float root;
+};
 
 #endif  // 

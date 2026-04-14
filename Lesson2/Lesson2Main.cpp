@@ -13,50 +13,25 @@
 using namespace std;
 
 
-
 int main()
 {
   std::cout << "Solve first degree equation aX + b = 0.\n\n";
   
   // Preconfigured parameters 
-  float root = 0.0;
-  bool ret = false;
-  string consout;
-
-  // Case 1
-  FDEqParams params{ 10, 20 };
-  if (validateFDEqParams(params) == true)
   {
-    ret = calculateRootFirstDegreeEq(&root, params);                                                                                                            
-    consout = displayEquationByParam(params) + "[" + std::to_string(root) + "]\n";    
-  }
-  else
-  {
-    consout = displayEquationByParam(params);
-  }
-  std::cout << consout << "\n";
+    FDEq eq1(-2, 6);
+    std::cout << eq1.calculateFDEroot();
 
-  params = { 0.0, 0.0 };
+    eq1.setFDEqTerm();
+    std::cout << eq1.calculateFDEroot();
+
+    eq1.setFDEq(0, 2.4);
+    std::cout << eq1.calculateFDEroot();
+
+    eq1.setFDEq(3.1, 0.0);
+    std::cout << eq1.calculateFDEroot();
+  } 
   
-  // Case 2
-  while (true)
-  {
-    populateFDEqParams(&params);
-    if (validateFDEqParams(params) == true)
-      break;
-  }
-  if (validateFDEqParams(params) == true)
-  {
-    ret = calculateRootFirstDegreeEq(&root, params);
-    consout = displayEquationByParam(params) + "[" + std::to_string(root) + "]\n";
-  }
-  else
-  {
-    consout = displayEquationByParam(params);
-  }
-  std::cout << consout << "\n";
-
-
-  std::cout << std::endl;
+  return 0;
 }
 

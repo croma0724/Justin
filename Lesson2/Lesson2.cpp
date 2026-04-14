@@ -5,74 +5,54 @@
 #include <iostream>
 #include "Lesson2.h"
 using namespace std;
- 
-bool calculateRootFirstDegreeEq(float* proot, FDEqParams param)
+
+FDEq::FDEq(float a, float b) : params{ a,b }, root(0.0)
 {
-  bool ret = false;
-
-  if (proot == NULL)
-  {
-    std::cout << "Failed to extract root, invalid paameters input!\n";
-    return ret;
-  }
-
-  *proot = 0;
-  if (validateFDEqParams(param) == false)
-  {
-    return ret;
-  }
-
-  *proot = -(param.b / param.a);
-  ret = true;
-
-  return ret; 
 }
 
-void populateFDEqParams(FDEqParams* pparam)
+FDEq::FDEq(void) : params{ 0.0, 0.0 }, root(0.0)
+{}
+
+void FDEq::setFDEq(float a, float b)
+{
+  params = { a, b };
+}
+
+void FDEq::setFDEqTerm()
 {
   std::cout << "Enter parameter 'a' for ax + b equation as a float:\n";
-  cin >> pparam->a;
+  cin >> params.a;
 
   std::cout << "\bEnter parameter 'b' for ax + b equation as a float:\n";
-  cin >> pparam->b;
+  cin >> params.b;
 }
 
-bool validateFDEqParams(FDEqParams param)
+string FDEq::calculateFDEroot()
 {
+  string ret;
+  root = 0.0;
 
-  bool ret = false;
-
-  if (param.a == 0)
+  if (isValidFDEqParams(params) == true)
   {
-    std::cout << "Invalid equation paramete,  'a' = 0, resulting equation b = 0\n";
-    return ret;
-  }
-
-  if (param.b == 0)
-  {
-    std::cout << "Invalid equation paramete,  'b' = 0, resulting equaion aX = 0\n";
-    return ret;
-  }
-
-  ret = true;
-  return ret;
-}
-
-string displayEquationByParam(FDEqParams param)
-{
-  string out;
-  bool ret = validateFDEqParams(param);
-  if (ret == true)
-  {
-    out = "Equation " + std::to_string(param.a) + " x X + " + std::to_string(param.b) + 
-            " = 0 root:  ";
+    root = -(params.b / params.a);
+    ret = displayFDEq() + "Root: " + to_string(root) + "\n\n";
   }
   else
   {
-    out = "Equation  " + std::to_string(param.a) + " x X + " + std::to_string(param.b) + 
-            " = 0, parameters {" + std::to_string(param.a) + "," + 
-            std::to_string(param.b) + " invalid!";
-  } 
+    ret = displayFDEq() + "Error: invalid equation parameter.\n\n";
+  }
 
-  return out;
+  return ret;
+}
+
+string FDEq::displayFDEq() const
+{
+  string ret = "Equation:  " + std::to_string(params.a) + " x X + " + 
+        std::to_string(params.b) + " = 0.   ";
+  return ret;
+}
+
+bool FDEq::isValidFDEqParams(FDEqParams& param) const
+{
+  return param.a != 0 && param.b != 0;
 }
