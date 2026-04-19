@@ -14,8 +14,8 @@ using namespace std;
 
 void DataType::commandMenu()
 {
-	displayMenu();
-	readCmdFromConsole();
+	displayDataTypeMenu();
+	readDataTypeCommand();
 
 	switch (oper) {
 	case QUIT_TYPE:
@@ -25,7 +25,7 @@ void DataType::commandMenu()
 				{
 					IntType_t intVals = {-10000, 10000, -100000, 100000, -1000000, 1000000};
 					IntDataType intType(intVals);
-
+					intType.commandMenu();
 				}
 				break;
 
@@ -35,7 +35,7 @@ void DataType::commandMenu()
 }
 
 
-void DataType::displayMenu() const
+void DataType::displayDataTypeMenu() const
 {
 	system("cls");
 	std::cout << "**************************************\n"
@@ -49,7 +49,7 @@ void DataType::displayMenu() const
 	std::cout << "Select options to contiunue {1,...5, 9}:\n";
 }
 
-void DataType::readCmdFromConsole()
+void DataType::readDataTypeCommand()
 {
 	while (true) {
 		int ret = 0;

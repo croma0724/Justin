@@ -22,7 +22,12 @@ void Console::processInput()
 	{
 //		NumberType nrType;
 //		nrType.testInt();
+		
+		DataType  dtype;
+		dtype.commandMenu();
 
+
+#ifdef AAAAAAAAAAA
 		IntType_t intType = { -10000, 10000, -1000000, 1000000, -10000000, 10000000 };
 		IntDataType intObj(intType);
 		IntDataType::IntDataOpType_t retop = (IntDataType::IntDataOpType_t) intObj.commandMenu();
@@ -43,6 +48,9 @@ void Console::processInput()
 		default:
 					break;
 		}
+#endif // AAAAAAAAAAAA
+
+
 
 
 	}

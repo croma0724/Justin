@@ -32,13 +32,20 @@ public:
 	//
 	void commandMenu();
 
-protected:
+///protected:
 
 private:
 	DataTypeOp_t oper;
 
-	void displayMenu() const;
-	void readCmdFromConsole();
+	// displayDataTypeMenu: display object main menu with list of supported 
+	//		commands
+	// 
+	void displayDataTypeMenu() const;
+	
+	// readDataTypeCommand: retrieve user command and update <oper>.
+	//    Loop until the command is valid or QUIT.
+	//
+	void readDataTypeCommand();
 };
 
 

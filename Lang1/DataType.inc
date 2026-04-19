@@ -16,12 +16,12 @@ void IntDataType::setData(const IntType_t& t)
 }
 
 template <typename T>
-DisplayIntType<T>::DisplayIntType(T t) : val(t)
+DisplayIntValue<T>::DisplayIntValue(T t) : val(t)
 {
 }
 
 template <typename T>
-void DisplayIntType<T>::displayHeader() const
+void DisplayIntValue<T>::displayHeader() const
 {
 	char lineBuff[LineSz];
 	memset(lineBuff, ' ', LineSz-2);
@@ -36,7 +36,7 @@ void DisplayIntType<T>::displayHeader() const
 }
 
 template <typename T>
-void DisplayIntType<T>::displayInt(const std::string& name) const
+void DisplayIntValue<T>::displayIntValue(const std::string& name) const
 {
 	char lineBuff[LineSz];
 	memset(lineBuff, ' ', LineSz-2);

@@ -22,7 +22,7 @@ public:
 		LOGICAL_OPER,
 		TEST_ARIT_OPER,
 		TEST_LOGIC_OPER,
-		QUIT = 9
+		QUIT_INT = 9
 	} IntDataOpType_t;
 
 public:
@@ -31,7 +31,7 @@ public:
 	// commandMenu: read console for cmd to execute.
 	// @return:  command ID
 	//
-	int commandMenu() const;
+	void commandMenu();
 
 	// setData:  set <intType> data structure
 	// @input:  inp, new intType values
@@ -59,19 +59,33 @@ protected:
 	}
 
 private:
-	// Operation type
-	IntDataOpType_t opType;
-
 	// Integer data type 
 	IntType_t  intType;
 
+	// Operation type
+	IntDataOpType_t intOper;
 
-	string displayToStringHeader() const;
+	// displayIntDataTypeMenu: display object main menu with list of supported 
+	//		commands
+	// 
+	void displayIntDataTypeMenu() const;
+
+	// readDataTypeCommand: retrieve user command and update <oper>.
+	//    Loop until the command is valid or QUIT.
+	//
+	void readIntDataTypeCommand();
 };
 
+
+// DisplayIntValue: class used to display the header and values for IntDataType
+// Template used for different int types.
+//    Header format: var name and values in decimal, hex and bianry:
+//			Name			Decimal   Hex    Binary
+//			  
 template <typename T>
-class DisplayIntType {
+class DisplayIntValue {
 public:
+	// Offsets on displayed line
 	static const int LineSz = 80;
 	static const int NameOff = 4;
 	static const int DecOff = NameOff + 12;
@@ -79,10 +93,16 @@ public:
 	static const int BinOff = HexOff +12;
 
 public:
-	DisplayIntType(T t);
+	DisplayIntValue(T t);
 
+	// displayHeader:  display header (see foramt above)
+	//
 	void displayHeader() const;
-	void displayInt(const std::string& name) const;
+	
+	// displayIntValue: populate header format with <val> value in decimal, hex
+	//		and bianry
+	// 
+	void displayIntValue(const std::string& name) const;
 
 protected:
 	T	val;

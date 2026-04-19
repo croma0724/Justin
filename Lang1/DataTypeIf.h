@@ -33,7 +33,7 @@ public:
 	//			Selection from console.
 	// @return: cmd
 	//
-	virtual int commandMenu() const = 0;
+	virtual void commandMenu() = 0;
 
 	// setData: set data
 	// @input:  t, source data

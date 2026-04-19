@@ -12,12 +12,6 @@ public:
 		Quit = 20
 	} Option;
 
-	typedef enum DataType {
-		DataNumber,
-		DataChar,
-		DataArray,
-	} DataType;
-
 public:
 	// Display menu 
 	Console();
