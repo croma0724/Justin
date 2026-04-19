@@ -7,6 +7,7 @@
 #include <string>
 #include "Console.h"
 #include "DataType.h"
+#include "Int_DataType.h"
 using namespace std;
 
 Console::Console()
@@ -28,14 +29,14 @@ void Console::processInput()
 		cout << "Options........[" << retop << "]\n";
 
 		switch (retop) {
-		case IntDataType::SETUP_STRUCT:
+		case IntDataType::SETUP_DATA:
 					{
 						IntType_t	t = { -20000, 20000, -2000000, 2000000, -20000000, 20000000 };
 						intObj.setData(t);
 					}
 					break;
 
-		case IntDataType::DISPLAY_STRUCT:
+		case IntDataType::DISPLAY_DATA:
 					std::cout << intObj.toString();
 					break;
 

@@ -7,7 +7,7 @@
 #include <string>
 #include <sstream>
 #include <bitset>
-#include "DataType.h"
+#include "Int_DataType.h"
 using namespace std;
 
 void IntDataType::setData(const IntType_t& t) 
