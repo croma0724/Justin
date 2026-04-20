@@ -8,85 +8,84 @@
 #include "Console.h"
 #include "DataType.h"
 #include "Int_DataType.h"
+#include "Helper.inc"
 using namespace std;
 
-Console::Console()
+static const std::string ErrMsg("Error Console menu selection, invalid ID: ");
+
+Console::Console() : consOper(NO_OPERATION), menuId(0)
 {}
 
-void Console::processInput()
+Console::ConsMenu_t Console::processConsoleCmd()
 {
-	Console::Option ret = getCommand();
-	std::cout << "Option: [" << ret << "]\n";
-
-	if (ret == Option::DataOper)
+	while (consOper != QUIT)
 	{
-//		NumberType nrType;
-//		nrType.testInt();
+		// read command from console
+		readCmd();
 		
-		DataType  dtype;
-		dtype.commandMenu();
+		switch (consOper) {
+		case QUIT:
+			// Exit function.
+			consOper = NO_OPERATION;
+			return QUIT;
 
-
-#ifdef AAAAAAAAAAA
-		IntType_t intType = { -10000, 10000, -1000000, 1000000, -10000000, 10000000 };
-		IntDataType intObj(intType);
-		IntDataType::IntDataOpType_t retop = (IntDataType::IntDataOpType_t) intObj.commandMenu();
-		cout << "Options........[" << retop << "]\n";
-
-		switch (retop) {
-		case IntDataType::SETUP_DATA:
-					{
-						IntType_t	t = { -20000, 20000, -2000000, 2000000, -20000000, 20000000 };
-						intObj.setData(t);
-					}
-					break;
-
-		case IntDataType::DISPLAY_DATA:
-					std::cout << intObj.toString();
-					break;
+		case DATA_MENU:
+		{
+			DataType  dtype;
+			DataType::DTMenu_t res = dtype.processDataTypeCmd();
+			if (res == DataType::DTMenu_t::QUIT)
+			{
+				consOper = QUIT;
+			}
+			else
+			{
+				consOper = NO_OPERATION;
+			}
+		}
+		break;
 
 		default:
-					break;
+			break;
 		}
-#endif // AAAAAAAAAAAA
+	}
 
+	return consOper;
+}
 
+void Console::readCmd()
+{
+	while (true)
+	{
+		displayConsoleMenu();
 
-
+		// Read command
+		std::cin >> menuId;
+	
+		if (menuId == QUIT ||
+			validateMinMax<int>(DATA_MENU, CLASS_MENU, menuId) == true)
+		{
+			consOper = (ConsMenu_t)menuId;
+			menuId = 0;
+			break;
+		}
 	}
 }
 
-Console::Option Console::getCommand() const
+void Console::displayConsoleMenu() const
 {
-	Option ret = Option::Quit;
-
-	bool loop = true;
-	while (loop) {
-		system("cls");
-
-		std::cout << "**************************************\n"
-			<< "\tHello to C++ Tutorial\n\n";
-		std::cout << "Select options to contiunue:\n";
-		std::cout << "\tData Type              1\n";
-		std::cout << "\tString                 2\n";
-		std::cout << "\tPointers               3\n";
-		std::cout << "\tMemory                 4\n";
-		std::cout << "\tQuit                   10\n";
-
-		std::cout << "\nEnter option {1, ...10}:  ";
-		int opt;
-		cin >> opt;
-
-		if (opt == Option::DataOper ||
-			opt == Option::StringOper ||
-			opt == Option::Pointers ||
-			opt == Option::Memory ||
-			opt == Option::Quit)
-		{
-			ret = (Option)opt;
-			loop = false;
-		}
+	system("cls");
+	std::cout << "**************************************\n"
+						<< "\tHello to C++ Tutorial. Menu selection:\n\n";
+	if (menuId)
+	{
+		std::cout << ErrMsg << std::to_string(menuId) << "\n\n";
 	}
-
-	return ret;
+	std::cout << "Select options to contiunue:\n";
+	std::cout << "\tData Type              1\n";
+	std::cout << "\tString                 2\n";
+	std::cout << "\tMemory                 3\n";
+	std::cout << "\tClass                  4\n";
+	std::cout << "\tQuit                   9\n\n";
+	std::cout << "Select option {" << std::to_string(DATA_MENU) << "..." << 
+		std::to_string(CLASS_MENU) << ", " << std::to_string(QUIT) << "}:  ";
 }

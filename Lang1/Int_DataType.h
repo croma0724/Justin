@@ -12,31 +12,31 @@
 #include "DataTypeIf.h"
 using namespace std;
 
-
-class IntDataType : public DataTypeIf <IntType_t> {
+class IntDataType : public DataTypeIf <IntDataSt_t> {
 public:
-	typedef enum IntDataOpType {
-		SETUP_DATA		= 1,
-		DISPLAY_DATA,
-		ARITMETICAL_OPER,
-		LOGICAL_OPER,
-		TEST_ARIT_OPER,
-		TEST_LOGIC_OPER,
-		QUIT_INT = 9
-	} IntDataOpType_t;
+	typedef enum IntDataTypeOper {
+		NO_OPERATION = 0,
+		SETUP_DATA,           // 1
+		DISPLAY_DATA,         // 2 			
+		ARITMETICAL_OPER,     // 3 
+		LOGICAL_OPER,         // 4
+		TEST_ARIT_OPER,       // 5
+		TEST_LOGIC_OPER,      // 6 
+		QUIT = 9              // 9
+	} IntDTOper_t;
 
 public:
-	IntDataType(const IntType_t& t);
+	IntDataType(const IntDataSt_t& t);
 
 	// commandMenu: read console for cmd to execute.
 	// @return:  command ID
 	//
-	void commandMenu();
+	int commandMenu();
 
-	// setData:  set <intType> data structure
+	// setData: update data from the console.
 	// @input:  inp, new intType values
 	//
-	void setData(const IntType_t& t);
+	void setData(const IntDataSt_t& t);
 	
 	// toString: display intType in dec/hex and binary format.
 	// @return: data in user friendly format 
@@ -50,6 +50,11 @@ public:
 	bool operation(int op = 0);
 	
 protected:
+	// readIntDTCmd: read command from console, loop until valid cmd
+	//		QUIT is a valid one.
+	// 	
+	void 	readIntDTCmd();
+
 	bool aritmeticOperation() {
 		return false;
 	}
@@ -60,20 +65,25 @@ protected:
 
 private:
 	// Integer data type 
-	IntType_t  intType;
+	IntDataSt_t intType;
 
 	// Operation type
-	IntDataOpType_t intOper;
+	IntDTOper_t intOper;
+
+	// Console command ID. Normally 0.
+	int menuId;
 
 	// displayIntDataTypeMenu: display object main menu with list of supported 
 	//		commands
 	// 
-	void displayIntDataTypeMenu() const;
+	void displayIntDTMenu() const;
 
 	// readDataTypeCommand: retrieve user command and update <oper>.
 	//    Loop until the command is valid or QUIT.
 	//
 	void readIntDataTypeCommand();
+
+	void displayIntDataLimits() const;
 };
 
 

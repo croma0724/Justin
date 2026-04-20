@@ -10,11 +10,6 @@
 #include "Int_DataType.h"
 using namespace std;
 
-void IntDataType::setData(const IntType_t& t) 
-{
-	intType = t;
-}
-
 template <typename T>
 DisplayIntValue<T>::DisplayIntValue(T t) : val(t)
 {

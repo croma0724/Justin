@@ -14,14 +14,14 @@ using namespace std;
  
 // IntType_t: integer types to be tested
 // 
-typedef struct IntType {
+typedef struct IntStruct {
 	short sVar;
 	unsigned short usVar;
 	int	iVar;
 	unsigned int uiVar;
 	long lVar;
 	unsigned ulVar;
-} IntType_t;
+} IntDataSt_t;
 
 
 // DataTypeIf: abstract interface to data types
@@ -29,13 +29,13 @@ typedef struct IntType {
 template <typename T>
 class DataTypeIf {
 public:
-	// commandMenu: display menu of oerations and return selected one
+	// commandMenu: retrieve from console command to execute. 
 	//			Selection from console.
 	// @return: cmd
 	//
-	virtual void commandMenu() = 0;
+	virtual int commandMenu() = 0;
 
-	// setData: set data
+	// setData: update data from the console.
 	// @input:  t, source data
 	// @return: 
 	//

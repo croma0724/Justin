@@ -12,24 +12,27 @@
 using namespace std;
 
 
-IntDataType::IntDataType(const IntType_t& t) : intType(t)
+IntDataType::IntDataType(const IntDataSt_t& t) : intType(t)
 {}
 
-void IntDataType::commandMenu()
+int IntDataType::commandMenu()
 {
-	displayIntDataTypeMenu();
+	int ret = 0;
+	displayIntDTMenu();
 	readIntDataTypeCommand();
 
-	IntType_t intVals = { -10000, 10000, -100000, 100000, -1000000, 1000000 };
+	IntDataSt_t intVals = { -10000, 10000, -100000, 100000, -1000000, 1000000 };
 	IntDataType intDataVar(intVals);
 
 	switch (intOper) {
-	case QUIT_INT:
+	case QUIT:
+				intOper = NO_OPERATION;
+				ret = QUIT;
 				break;
 
 	case SETUP_DATA:
 				{
-					IntType_t intVals = { -10000, 10000, -100000, 100000, -1000000, 1000000 };
+					IntDataSt_t intVals = { -10000, 10000, -100000, 100000, -1000000, 1000000 };
 					intDataVar.setData(intVals);
 				}
 				break;
@@ -41,8 +44,21 @@ void IntDataType::commandMenu()
 	default:
 				break;
 	}
+
+	intOper = NO_OPERATION;
+	if (ret != QUIT)
+	{
+		ret = 0;
+	}
+
+	return ret;
 }  
 
+void IntDataType::setData(const IntDataSt_t& t)
+{
+	displayIntDataLimits();
+	intType = t;
+}
 
 std::string IntDataType::toString() const
 {
@@ -75,19 +91,40 @@ bool IntDataType::operation(int op)
 	return op == 1 ? logicalOperation() : aritmeticOperation();
 }
 
-void IntDataType::displayIntDataTypeMenu() const
+void IntDataType::readIntDTCmd()
+{
+	while (true)
+	{
+		displayIntDTMenu();
+
+		// Read command
+		std::cin >> menuId;
+
+		if (menuId == QUIT ||
+			validateMinMax<int>(SETUP_DATA, TEST_LOGIC_OPER, menuId) == true)
+		{
+			intOper = (IntDTOper_t)menuId;
+			menuId = 0;
+			break;
+		}
+	}
+}
+
+void IntDataType::displayIntDTMenu() const
 {
 	system("cls");
 	std::cout << "**************************************\n"
-		<< "\tHello to C++ Integer Data types selection\n\n";
+		<< "\tHello to C++ Integer Data tutorial. Menu selection: \n\n";
 	std::cout << "\tSetup values                            1\n";
 	std::cout << "\tDisplay Integer type                    2\n";
 	std::cout << "\tInteger type operations                 3\n";
 	std::cout << "\tInteger type logic operations           4\n";
 	std::cout << "\tInteger test type operations            5\n";
 	std::cout << "\tInteger test type logical operations    6\n";
-	std::cout << "\tQuit                                    9\n";
-	std::cout << "Select options to contiunue {1,...6, 9}:\n";
+	std::cout << "\tQuit                                    9\n\n";
+
+	std::cout << "Select option {" << std::to_string(SETUP_DATA) << "..." <<
+		std::to_string(TEST_LOGIC_OPER) << ", " << std::to_string(QUIT) << "}:  ";
 }
 
 void IntDataType::readIntDataTypeCommand()
@@ -95,12 +132,38 @@ void IntDataType::readIntDataTypeCommand()
 	while (true) {
 		int ret = 0;
 		std::cin >> ret;
-		intOper = (IntDataOpType_t)ret;
+		intOper = (IntDTOper_t)ret;
 
-		if (intOper == QUIT_INT ||
-			validateMinMax<IntDataOpType_t>(SETUP_DATA, TEST_LOGIC_OPER, intOper) == true)
+		if (intOper == QUIT ||
+			validateMinMax<IntDTOper_t>(SETUP_DATA, TEST_LOGIC_OPER, intOper) == true)
 		{
 			break;
 		}
 	}
+}
+
+void IntDataType::displayIntDataLimits() const
+{
+	system("cls");
+	std::cout << "C++ update integer types:\n";
+	std::cout << "\tinteger size: [" << sizeof(int) << "] bytes. Min / max values :       [" <<
+		std::numeric_limits<int>::min() << ", " <<
+		std::numeric_limits<int>::max() << "]\n";
+	std::cout << "\tunsigned integer size: [" << sizeof(unsigned int) << "]  bytes. Min/max values:  [" <<
+		std::numeric_limits<unsigned int>::min() << ", " <<
+		std::numeric_limits<unsigned int>::max() << "]\n";
+
+	std::cout << "\tshort size: [" << sizeof(short) << "] bytes. Min / max values :         [" <<
+		std::numeric_limits<short>::min() << ", " <<
+		std::numeric_limits<short>::max() << "]\n";
+	std::cout << "\tunsigned short size: [" << sizeof(unsigned short) << "] bytes. Min/max values:    [" <<
+		std::numeric_limits<unsigned short>::min() << ", " <<
+		std::numeric_limits<unsigned short>::max() << "]\n";
+
+	std::cout << "\tlong size: [" << sizeof(long) << "] bytes. Min/max values:             [" <<
+		std::numeric_limits<long>::min() << ", " <<
+		std::numeric_limits<long>::max() << "]\n";
+	std::cout << "\tunsigned long size: [" << sizeof(unsigned long) << "] bytes. Min/max values:     [" <<
+		std::numeric_limits<unsigned long>::min() << ", " <<
+		std::numeric_limits<unsigned long>::max() << "]\n";
 }

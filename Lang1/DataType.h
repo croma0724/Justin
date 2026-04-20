@@ -1,11 +1,10 @@
+#pragma once
 /******************************************************************************
 *
 * DataType.h : data types definitions
 * 
 *
 ******************************************************************************/
-#pragma once
-
 #ifndef __DATATYPE_H__
 #define __DATATYPE_H__
 
@@ -14,34 +13,46 @@ using namespace std;
  
 class DataType {
 public:
-	typedef enum DataTypeOp {
-		INTDATA_TYPE   =1,	// 1, i
-		FLOATDATA_TYPE,			// 2, f
-		CHATDATA_TYPE,			// 3, c
-		ARRAY_TYPE,					// 4, a
-		STRING_TYPE,				// 5, s
-		QUIT_TYPE,					// 9, q
-	} DataTypeOp_t;
+	typedef enum DataTypeMenu {
+		NO_OPERATION   = 0,
+		INTDT_MENU,					// 1
+		FLOATDT_MENU,				// 2
+		CHATDT_MENU,				// 3
+		ARRAYDT_MENU,				// 4
+		STRINGDT_MENU,			// 5
+		QUIT					 = 9, // 9
+	} DTMenu_t;
 
 public:
-	DataType() {};
-
-	// commandMenu: display menu of oerations and return selected one
-	//			Selection from console.
-	// @return: cmd
+	DataType(); 
+	
+	// processDataTypeCmd:  select command from menu and execute it. 
+	//    Loop, exit when command is QUIT
+	// @return: command ID
+	
 	//
-	void commandMenu();
+	DTMenu_t processDataTypeCmd();
 
-///protected:
+protected:
+	// readDTCmd: read command from console, loop until valid cmd
+	//		QUIT is a valid one.
+	//  
+	void 	readDTCmd();
 
 private:
-	DataTypeOp_t oper;
+	// Menu to execute
+	DTMenu_t dataOper;
+
+	// Console command ID. Normally 0.
+	int menuId;
 
 	// displayDataTypeMenu: display object main menu with list of supported 
 	//		commands
 	// 
-	void displayDataTypeMenu() const;
+	void displayDTMenu() const;
 	
+
+	// DELETE **********************************
 	// readDataTypeCommand: retrieve user command and update <oper>.
 	//    Loop until the command is valid or QUIT.
 	//
