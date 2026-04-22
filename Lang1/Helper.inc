@@ -28,7 +28,13 @@ bool validateMinMax(const T& min, const T& max, T inp)
 	return (inp >= min && inp <= max);
 }
 
-// Read int from console, validate limits
+// readInt: read int from console. 
+//		Processing: validate input depending on T type
+//      - entering empty line does not update output, valid option
+//      - entering q or Q does not udpate output and is a request to 
+//			stop the menu retrieving a structure if ints.
+// @output
+// 
 template <typename T>
 T readInt(const std::string& msg)
 {
@@ -66,8 +72,8 @@ T readInt(const std::string& msg)
 			}
 		}
 		
-		if (tmp >= std::numeric_limits<T>::min() &&
-			tmp <= std::numeric_limits<T>::max())
+		if (std::numeric_limits<T>::min() << (T) tmp &&
+			std::numeric_limits<T>::max() >> (T) tmp)
 		{
 			break;
 		}
