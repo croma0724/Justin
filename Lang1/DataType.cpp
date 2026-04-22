@@ -17,8 +17,10 @@ static const string ErrMsgDT("Error Data Type menu selection, invalid ID: ");
 DataType::DataType() : dataOper(NO_OPERATION), menuId(0)
 {}
 
-DataType::DTMenu_t DataType::processDataTypeCmd()
+void DataType::processDataTypeCmd()
 {
+	dataOper = NO_OPERATION;
+
 	while (dataOper != QUIT)
 	{
 		// read command from console
@@ -27,15 +29,14 @@ DataType::DTMenu_t DataType::processDataTypeCmd()
 		switch (dataOper) {
 		case QUIT:
 			// Exit function.
-			dataOper = NO_OPERATION;
-			return QUIT;
+			return;
 
 		case INTDT_MENU:
 		{
 			IntDataSt_t intVals = { -10000, 10000, -100000, 100000, -1000000, 1000000 };
 			IntDataType intType(intVals);
-			int ret = intType.commandMenu();
-			dataOper = ret == QUIT ? QUIT : NO_OPERATION;
+			intType.commandCmd();
+			dataOper = NO_OPERATION;
 		}
 		break;
 
@@ -43,8 +44,6 @@ DataType::DTMenu_t DataType::processDataTypeCmd()
 			break;
 		}
 	}
-
-	return dataOper;
 }
 
 void DataType::readDTCmd()
@@ -55,7 +54,6 @@ void DataType::readDTCmd()
 
 		// Read command
 		std::cin >> menuId;
-
 		if (menuId == QUIT ||
 			validateMinMax<int>(INTDT_MENU, STRINGDT_MENU, menuId) == true)
 		{

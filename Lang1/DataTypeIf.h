@@ -20,7 +20,7 @@ typedef struct IntStruct {
 	int	iVar;
 	unsigned int uiVar;
 	long lVar;
-	unsigned ulVar;
+	unsigned long ulVar;
 } IntDataSt_t;
 
 
@@ -33,12 +33,13 @@ public:
 	//			Selection from console.
 	// @return: cmd
 	//
-	virtual int commandMenu() = 0;
+	virtual void commandCmd() = 0;
 
 	// setData: update data from the console.
 	// @input:  t, source data
 	// @return: 
 	//
+	virtual void set() = 0;
 	virtual void setData(const T& t) = 0;
 
 	// toString: dump object as string. Format:

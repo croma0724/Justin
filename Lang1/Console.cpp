@@ -16,56 +16,47 @@ static const std::string ErrMsg("Error Console menu selection, invalid ID: ");
 Console::Console() : consOper(NO_OPERATION), menuId(0)
 {}
 
-Console::ConsMenu_t Console::processConsoleCmd()
+void Console::processConsoleCmd()
 {
+	consOper = NO_OPERATION;
+
 	while (consOper != QUIT)
 	{
 		// read command from console
-		readCmd();
+		readConsoleCmd();
 		
 		switch (consOper) {
 		case QUIT:
 			// Exit function.
-			consOper = NO_OPERATION;
-			return QUIT;
+			return;
 
 		case DATA_MENU:
-		{
-			DataType  dtype;
-			DataType::DTMenu_t res = dtype.processDataTypeCmd();
-			if (res == DataType::DTMenu_t::QUIT)
 			{
-				consOper = QUIT;
+				DataType  dtype;
+				dtype.processDataTypeCmd();
 			}
-			else
-			{
-				consOper = NO_OPERATION;
-			}
-		}
-		break;
+			break;
 
 		default:
 			break;
 		}
 	}
-
-	return consOper;
 }
 
-void Console::readCmd()
+void Console::readConsoleCmd()
 {
 	while (true)
 	{
 		displayConsoleMenu();
 
 		// Read command
+		int menuId;
 		std::cin >> menuId;
 	
 		if (menuId == QUIT ||
 			validateMinMax<int>(DATA_MENU, CLASS_MENU, menuId) == true)
 		{
 			consOper = (ConsMenu_t)menuId;
-			menuId = 0;
 			break;
 		}
 	}

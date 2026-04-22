@@ -28,13 +28,13 @@ public:
 	//    another command. Exit when command is QUIT
 	// @return: command ID
 	//
-	ConsMenu_t processConsoleCmd();
+	void processConsoleCmd();
 
 protected:
 	// readCmd: read command from console, loop until valid cmd
 	//		QUIT is a valid one.
 	//  
-	void 	readCmd();
+	void 	readConsoleCmd();
 
 private:
 	// Menu to execute

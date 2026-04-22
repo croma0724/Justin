@@ -31,11 +31,12 @@ public:
 	// commandMenu: read console for cmd to execute.
 	// @return:  command ID
 	//
-	int commandMenu();
+	void commandCmd();
 
 	// setData: update data from the console.
 	// @input:  inp, new intType values
 	//
+	void set();
 	void setData(const IntDataSt_t& t);
 	
 	// toString: display intType in dec/hex and binary format.
@@ -70,7 +71,7 @@ private:
 	// Operation type
 	IntDTOper_t intOper;
 
-	// Console command ID. Normally 0.
+	// Console command ID. 
 	int menuId;
 
 	// displayIntDataTypeMenu: display object main menu with list of supported 
@@ -84,6 +85,8 @@ private:
 	void readIntDataTypeCommand();
 
 	void displayIntDataLimits() const;
+	void readIntStructData(IntDataSt_t& out);
+
 };
 
 

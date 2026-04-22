@@ -9,50 +9,52 @@
 #include <array>
 #include "DataType.inc"
 #include "Helper.inc"
+#include "Helper.inc"
 using namespace std;
 
 
 IntDataType::IntDataType(const IntDataSt_t& t) : intType(t)
 {}
 
-int IntDataType::commandMenu()
+void IntDataType::commandCmd()
 {
-	int ret = 0;
-	displayIntDTMenu();
-	readIntDataTypeCommand();
-
-	IntDataSt_t intVals = { -10000, 10000, -100000, 100000, -1000000, 1000000 };
-	IntDataType intDataVar(intVals);
-
-	switch (intOper) {
-	case QUIT:
-				intOper = NO_OPERATION;
-				ret = QUIT;
-				break;
-
-	case SETUP_DATA:
-				{
-					IntDataSt_t intVals = { -10000, 10000, -100000, 100000, -1000000, 1000000 };
-					intDataVar.setData(intVals);
-				}
-				break;
-
-	case DISPLAY_DATA:
-				std::cout << intDataVar.toString();
-				break;
-
-	default:
-				break;
-	}
-
 	intOper = NO_OPERATION;
-	if (ret != QUIT)
-	{
-		ret = 0;
-	}
 
-	return ret;
-}  
+	while (intOper != QUIT)
+	{
+		// read command from console
+		readIntDTCmd();
+
+		switch (intOper) {
+		case QUIT:
+			return;
+	
+		case SETUP_DATA:
+		{
+			IntDataSt_t intVals = { -10000, 10000, -100000, 100000, -1000000, 1000000 };
+			IntDataType objIntDT(intVals);
+			//	.setData(intVals);
+			objIntDT.set();
+		}
+		break;
+
+		case DISPLAY_DATA:
+			std::cout << toString();
+			break;
+
+		default:
+			break;
+		}
+
+		intOper = NO_OPERATION;
+	}
+}
+
+void IntDataType::set()
+{
+	displayIntDataLimits();
+	readIntStructData(intType);
+}
 
 void IntDataType::setData(const IntDataSt_t& t)
 {
@@ -146,24 +148,43 @@ void IntDataType::displayIntDataLimits() const
 {
 	system("cls");
 	std::cout << "C++ update integer types:\n";
-	std::cout << "\tinteger size: [" << sizeof(int) << "] bytes. Min / max values :       [" <<
+
+	std::cout << "\tshort size:            [" << sizeof(short) << 
+		"] bytes. Min/max values:    [" <<
+		std::numeric_limits<short>::min() << ", " <<
+		std::numeric_limits<short>::max() << "]\n";
+	std::cout << "\tunsigned short size:   [" << sizeof(unsigned short) << 
+		"] bytes. Min/max values:    [" <<
+		std::numeric_limits<unsigned short>::min() << ", " <<
+		std::numeric_limits<unsigned short>::max() << "]\n";
+	           
+	std::cout << "\tinteger size:          [" << sizeof(int) << 
+		"] bytes. Min/max values:    [" <<
 		std::numeric_limits<int>::min() << ", " <<
 		std::numeric_limits<int>::max() << "]\n";
-	std::cout << "\tunsigned integer size: [" << sizeof(unsigned int) << "]  bytes. Min/max values:  [" <<
+	std::cout << "\tunsigned integer size: [" << sizeof(unsigned int) << 
+		"] bytes. Min/max values:    [" <<
 		std::numeric_limits<unsigned int>::min() << ", " <<
 		std::numeric_limits<unsigned int>::max() << "]\n";
 
-	std::cout << "\tshort size: [" << sizeof(short) << "] bytes. Min / max values :         [" <<
-		std::numeric_limits<short>::min() << ", " <<
-		std::numeric_limits<short>::max() << "]\n";
-	std::cout << "\tunsigned short size: [" << sizeof(unsigned short) << "] bytes. Min/max values:    [" <<
-		std::numeric_limits<unsigned short>::min() << ", " <<
-		std::numeric_limits<unsigned short>::max() << "]\n";
-
-	std::cout << "\tlong size: [" << sizeof(long) << "] bytes. Min/max values:             [" <<
+	std::cout << "\tlong size:             [" << sizeof(long) 
+		<< "] bytes. Min/max values:    [" <<
 		std::numeric_limits<long>::min() << ", " <<
 		std::numeric_limits<long>::max() << "]\n";
-	std::cout << "\tunsigned long size: [" << sizeof(unsigned long) << "] bytes. Min/max values:     [" <<
+	std::cout << "\tunsigned long size:    [" << sizeof(unsigned long) << 
+		"] bytes. Min/max values:    [" <<
 		std::numeric_limits<unsigned long>::min() << ", " <<
 		std::numeric_limits<unsigned long>::max() << "]\n";
+}
+
+void IntDataType::readIntStructData(IntDataSt_t& out)
+{
+	bool loop = false; 
+
+	out.sVar = readInt<short>(std::string("Enter short: "));
+	out.usVar = readInt<unsigned short>(std::string("Enter unsigned short: "));
+	out.iVar = readInt<int>(std::string("Enter int: "));
+	out.uiVar = readInt<unsigned int>(std::string("Enter unsigned int: "));
+	out.lVar = readInt<long>(std::string("Enter long: "));
+	out.ulVar = readInt<unsigned long>(std::string("Enter unsigned long: "));
 }

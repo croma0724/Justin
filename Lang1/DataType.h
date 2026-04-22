@@ -28,10 +28,9 @@ public:
 	
 	// processDataTypeCmd:  select command from menu and execute it. 
 	//    Loop, exit when command is QUIT
-	// @return: command ID
-	
+	// @return: command ID	
 	//
-	DTMenu_t processDataTypeCmd();
+	void processDataTypeCmd();
 
 protected:
 	// readDTCmd: read command from console, loop until valid cmd
