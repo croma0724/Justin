@@ -127,19 +127,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseDataType.cpp" />
+    <ClCompile Include="BaseIntType.cpp" />
     <ClCompile Include="Console.cpp" />
-    <ClCompile Include="DataType.cpp" />
-    <ClCompile Include="Int_DataType.cpp" />
     <ClCompile Include="Lang1.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseIntType.h" />
     <ClInclude Include="Console.h" />
-    <ClInclude Include="DataType.h" />
+    <ClInclude Include="BaseDataType.h" />
     <ClInclude Include="DataTypeIf.h" />
-    <ClInclude Include="Int_DataType.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DataType.inc" />
     <None Include="Helper.inc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

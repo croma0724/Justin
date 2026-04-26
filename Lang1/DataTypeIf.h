@@ -11,17 +11,21 @@
 
 #include <string>
 using namespace std;
- 
+
 // IntType_t: integer types to be tested
 // 
-typedef struct IntStruct {
-	short sVar;
-	unsigned short usVar;
+typedef struct IntDataType {
+	char  cVar;
+	unsigned char ucVar;
+	short shVar;
+	unsigned short ushVar;
 	int	iVar;
 	unsigned int uiVar;
 	long lVar;
 	unsigned long ulVar;
-} IntDataSt_t;
+	long long llVar;
+	unsigned long long ullVar;
+} IntDataType_t;
 
 
 // DataTypeIf: abstract interface to data types
@@ -29,18 +33,12 @@ typedef struct IntStruct {
 template <typename T>
 class DataTypeIf {
 public:
-	// commandMenu: retrieve from console command to execute. 
-	//			Selection from console.
-	// @return: cmd
-	//
-	virtual void commandCmd() = 0;
-
 	// setData: update data from the console.
-	// @input:  t, source data
-	// @return: 
+	// @output: t, source data
+	// @return: true: done
+	//				false: failed, invalid data,...
 	//
-	virtual void set() = 0;
-	virtual void setData(const T& t) = 0;
+	virtual bool setData() = 0;
 
 	// toString: dump object as string. Format:
 	// ... 6...12  14...24 25...34 35... 76  
@@ -48,12 +46,6 @@ public:
 	// @return: string
 	//
 	virtual std::string toString() const = 0;
-
-	// operation: execute operations 
-	// @return:  true, completed ok
-	//					 false, failed
-	//
-	virtual bool operation(int op =0) = 0;
 };
 
 #endif

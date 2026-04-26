@@ -5,35 +5,41 @@
 ******************************************************************************/
 #include <iostream>
 #include <string>
+#include <sstream>
 #include "Console.h"
-#include "DataType.h"
-#include "Int_DataType.h"
+#include "BaseDataType.h"
+//#include "Int_DataType.h"
 #include "Helper.inc"
 using namespace std;
 
 static const std::string ErrMsg("Error Console menu selection, invalid ID: ");
 
-Console::Console() : consOper(NO_OPERATION), menuId(0)
+Console::Console()
 {}
 
-void Console::processConsoleCmd()
+void Console::processMainMenu()
 {
-	consOper = NO_OPERATION;
+	int menuId = 0;
 
-	while (consOper != QUIT)
+	while (true)
 	{
+		std::cout << displayMainMenu();
+
 		// read command from console
-		readConsoleCmd();
-		
-		switch (consOper) {
-		case QUIT:
-			// Exit function.
+		std::cin >> menuId;
+		if (menuId == QUIT)
 			return;
 
+		if (validateMinMax<int>(DATA_MENU, CLASS_MENU, menuId) == false)
+		{
+			continue;
+		}
+
+		switch (menuId) {
 		case DATA_MENU:
 			{
-				DataType  dtype;
-				dtype.processDataTypeCmd();
+				BaseDataType  dtype;
+				dtype.processBasicDataTypeMenu();
 			}
 			break;
 
@@ -43,40 +49,20 @@ void Console::processConsoleCmd()
 	}
 }
 
-void Console::readConsoleCmd()
-{
-	while (true)
-	{
-		displayConsoleMenu();
-
-		// Read command
-		int menuId;
-		std::cin >> menuId;
-	
-		if (menuId == QUIT ||
-			validateMinMax<int>(DATA_MENU, CLASS_MENU, menuId) == true)
-		{
-			consOper = (ConsMenu_t)menuId;
-			break;
-		}
-	}
-}
-
-void Console::displayConsoleMenu() const
+std::string Console::displayMainMenu() const
 {
 	system("cls");
-	std::cout << "**************************************\n"
+	std::ostringstream os;
+	os << "**************************************\n"
 						<< "\tHello to C++ Tutorial. Menu selection:\n\n";
-	if (menuId)
-	{
-		std::cout << ErrMsg << std::to_string(menuId) << "\n\n";
-	}
-	std::cout << "Select options to contiunue:\n";
-	std::cout << "\tData Type              1\n";
-	std::cout << "\tString                 2\n";
-	std::cout << "\tMemory                 3\n";
-	std::cout << "\tClass                  4\n";
-	std::cout << "\tQuit                   9\n\n";
-	std::cout << "Select option {" << std::to_string(DATA_MENU) << "..." << 
+	os << "Select options to continue:\n";
+	os << "\tData Type              1\n";
+	os << "\tString                 2\n";
+	os << "\tMemory                 3\n";
+	os << "\tClass                  4\n";
+	os << "\tQuit                   9\n\n";
+	os << "Select option {" << std::to_string(DATA_MENU) << "..." <<
 		std::to_string(CLASS_MENU) << ", " << std::to_string(QUIT) << "}:  ";
+
+	return os.str();
 }

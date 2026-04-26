@@ -10,7 +10,7 @@ int main(int argc, char** argv)
 	(void)argv;
 
 	Console cons;
-	cons.processConsoleCmd();
+	cons.processMainMenu();
 
 	return 0;
 }

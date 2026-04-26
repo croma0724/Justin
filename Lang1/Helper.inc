@@ -28,6 +28,8 @@ bool validateMinMax(const T& min, const T& max, T inp)
 	return (inp >= min && inp <= max);
 }
 
+
+
 // readInt: read int from console. 
 //		Processing: validate input depending on T type
 //      - entering empty line does not update output, valid option

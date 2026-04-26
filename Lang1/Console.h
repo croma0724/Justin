@@ -1,4 +1,3 @@
-#pragma once
 /******************************************************************************
 *
 * Console.h : data types definitions
@@ -21,32 +20,20 @@ public:
 	} ConsMenu_t;
 
 public:
-	// Display menu 
 	Console();
 
-	// processConsoleCmd:  select command to execute, execute it and loop for. 
-	//    another command. Exit when command is QUIT
-	// @return: command ID
-	//
-	void processConsoleCmd();
+	// processConsoleCmd:  display main menu and execute selected command.
+	// @return:  QUIT command 
+	// 
+	void processMainMenu();
 
 protected:
-	// readCmd: read command from console, loop until valid cmd
-	//		QUIT is a valid one.
-	//  
-	void 	readConsoleCmd();
 
 private:
-	// Menu to execute
-	ConsMenu_t consOper;
-	
-	// Console command ID. Normally 0.
-	int menuId;
-	
-	// displayDataTypeMenu: display object main menu with list of supported 
-	//		commands
-	// 
-	void displayConsoleMenu() const;
+	// displayDataTypeMenu: display object main menu.
+	// @return: user input, no validation
+	//
+	std::string displayMainMenu() const;
 };
 
 #endif

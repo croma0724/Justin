@@ -87,6 +87,14 @@ private:
 	void displayIntDataLimits() const;
 	void readIntStructData(IntDataSt_t& out);
 
+	// Display IntegerMenu header:
+	// "Integer Data Types " 
+	// "Name    Type     Size     Value     Min			Max"
+	//    every name....................
+	// "Select Update [1]  Quit [9].  Enter:  "   
+	// @return: 
+	// 	   
+	std::string displayIntTypeHeader() const;
 };
 
 
