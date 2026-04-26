@@ -26,7 +26,7 @@ public:
 public:
 	BaseDataType();
 	 
-	// processConsoleCmd:  display basic data type menu and execute selected 
+	// processBasicDataTypeMenu: display basic data type menu and execute selected 
 	//		command.
 	// @return: void, by QUIT command 
 	// 

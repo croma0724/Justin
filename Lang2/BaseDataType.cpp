@@ -9,7 +9,7 @@
 #include <chrono>
 #include <thread>
 #include "BaseDataType.h"
-//#include "BaseIntType.h" 
+#include "BaseIntType.h" 
 #include "DataTypeIf.h" 
 #include "Helper.inc"  
 
@@ -41,8 +41,8 @@ void    BaseDataType::processBasicDataTypeMenu()
 		case INT_DTMENU:
 				{
 					IntDataType_t value = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		//			BaseIntType dtype(value);
-		//			dtype.processBaseIntMenu();
+					BaseIntType dtype(value);
+					dtype.processBaseIntMenu();
 				}
 				break;
 

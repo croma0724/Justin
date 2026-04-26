@@ -128,11 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BaseDataType.h" />
+    <ClInclude Include="BaseIntType.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="DataTypeIf.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseDataType.cpp" />
+    <ClCompile Include="BaseIntType.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="Lang2.cpp" />
   </ItemGroup>
