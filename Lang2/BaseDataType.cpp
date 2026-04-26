@@ -24,27 +24,20 @@ Basic Data Type menu selection:\n\n"),
 	string("\tString Data                             5\n"),
 };
 
-
+BaseDataType::BaseDataType()
+{}
 
 void    BaseDataType::processBasicDataTypeMenu()
 {
-	int menuId = 0;
-
 	while (true)
 	{
-		std::cout << displayBDTMenu();
-
-		// read command from console
-		std::cin >> menuId;
-		if (menuId == QUIT)
-			return;
-
-		if (validateMinMax<int>(INT_DTMENU, STRING_DTMENU, menuId) == false)
+		DTMenu_t cmd = displayBDTMenu();
+		if (cmd == DTMenu_t::QUIT)
 		{
-			continue;
+			break;
 		}
 
-		switch (menuId) {
+		switch (cmd) {
 		case INT_DTMENU:
 				{
 					IntDataType_t value = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -103,6 +96,7 @@ BaseDataType::DTMenu_t BaseDataType::displayBDTMenu() const
 		}
 
 		ret = static_cast<DTMenu_t> (id);
+		break;
 	}
 		
 	return ret;

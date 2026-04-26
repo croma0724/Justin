@@ -24,7 +24,7 @@ public:
 	} DTMenu_t;
 	 
 public:
-	BaseDataType() {};
+	BaseDataType();
 	 
 	// processConsoleCmd:  display basic data type menu and execute selected 
 	//		command.
