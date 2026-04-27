@@ -71,16 +71,40 @@ private:
 	// @return:  command Id
 	//
 	IntType_e displayBaseIntMenu() const;
-
-	std::string displayIntEntryHeader() const;
-
-	// displayToStringHead:  header for toString() function
-	//    "    Name      Value           Type      Size"
-	std::string displayIntToStringHead() const;
 };
  
+template <typename T>
+class HelperIntType {
+public:
+	typedef struct IntEntryOff {
+		static const int hdIntNameOff = 4;
+		static const int hdIntValueOff = hdIntNameOff + 10;
+		static const int hdIntTypeOff = hdIntValueOff + 24;
+		static const int hdIntSizeOff = hdIntTypeOff + 24;
+		// Select option
+	} IntEntryOff_s;
 
-/// Helper.inc
-template <typename T> std::string displayIntValue(const std::string& name, const T& t);
+	typedef HelperIntType::IntEntryOff_s  IntOff;
+	static const IntOff intOff;
+
+public:
+	// displayIntOpt:  header for displaying int info
+	//    "    Name      Value           Type      Size"
+	// 
+	std::string displayIntOpt() const;
+	
+	// displayIntValue: display variable name and value. Format matching 
+	//			displayIntEntryHeader().   
+	// @input: name, variable name
+	//				t, variable value  
+	// @return: string
+	//
+	static std::string displayIntValue(const std::string& name, const T& t);
+
+	// getIntTypeAsString: return template type as a string
+	// @return:  <T> as string
+	//
+	static std::string getIntTypeAsString(T t = 0);
+};
 
 #endif

@@ -6,22 +6,23 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include "BaseIntType.h"
 #include "Helper.inc"
+#include "BaseIntType.h"
+#include "BaseIntType.inc"
 using namespace std;
 
 const vector<std::string> BaseIntType::BaseIntMenu = {
-		string("\tQuit                   0\n"),
-		string("\tChar                   1\n"),
-		string("\tUnsigned Char          2\n"),
-		string("\tShort                  3\n"),
-		string("\tUnsigned Short         4\n"),
-		string("\tInteger                5\n"),
-		string("\tUnsigned Integer       6\n"),
-		string("\tLong                   7\n"),
-		string("\tUnsigned Long          8\n"),
-		string("\tLong Long              9\n"),
-		string("\tUnsigned Long Long    10\n")
+		string("    Quit                              0\n"),
+		string("    Char                              1\n"),
+		string("    Unsigned Char                     2\n"),
+		string("    Short                             3\n"),
+		string("    Unsigned Short                    4\n"),
+		string("    Integer                           5\n"),
+		string("    Unsigned Integer                  6\n"),
+		string("    Long                              7\n"),
+		string("    Unsigned Long                     8\n"),
+		string("    Long Long                         9\n"),
+		string("    Unsigned Long Long               10\n")
 };
 
 static const HeadIntEntryOff_s headIntEtyOff;
@@ -33,19 +34,21 @@ BaseIntType::BaseIntType(IntDataType_t& t) : baseInt(t)
 std::string BaseIntType::toString() const
 {
 	ostringstream os;
+	HelperIntType<int> itype;
 
 	os << "Display int type structure:\n";
-	os << displayIntToStringHead();
-	os << displayIntValue<char>("cVar", baseInt.cVar);
-	os << displayIntValue<unsigned char>("ucVar", baseInt.ucVar);
-	os << displayIntValue<short>("shVar", baseInt.shVar);
-	os << displayIntValue<unsigned short>("ushVar", baseInt.ushVar);
-	os << displayIntValue<int>("iVar", baseInt.iVar);
-	os << displayIntValue<unsigned int>("uiVar", baseInt.uiVar);
-	os << displayIntValue<long>("lVar", baseInt.lVar);
-	os << displayIntValue<unsigned long>("ulVar", baseInt.ulVar);
-	os << displayIntValue<long long>("llVar", baseInt.llVar);
-	os << displayIntValue<unsigned long long>("ullVar", baseInt.ullVar);
+
+	os << itype.displayIntOpt();
+	os << HelperIntType<char>::displayIntValue("cVar", baseInt.cVar);
+	os << HelperIntType<unsigned char>::displayIntValue("ucVar", baseInt.ucVar);
+	os << HelperIntType<short>::displayIntValue("shVar", baseInt.shVar);
+	os << HelperIntType<unsigned short>::displayIntValue("shVar", baseInt.ushVar);
+	os << HelperIntType<int>::displayIntValue("iVar", baseInt.iVar);
+	os << HelperIntType<unsigned int>::displayIntValue("uiVar", baseInt.uiVar);
+	os << HelperIntType<long>::displayIntValue("lVar", baseInt.lVar);
+	os << HelperIntType<long>::displayIntValue("ulVar", baseInt.ulVar);
+	os << HelperIntType<long long>::displayIntValue("llVar", baseInt.llVar);
+	os << HelperIntType<unsigned long long>::displayIntValue("ullVar", baseInt.ullVar);
 	os << "\n\n";
 
 	return os.str();
@@ -112,17 +115,17 @@ BaseIntType::IntType_e BaseIntType::displayBaseIntMenu() const
 	while (true) {
 		system("cls");
 		std::cout << string("**************************************\n\t Hello to \
-C++ Integer Data tutorial. Menu selection: \n\n"),
+C++ Integer Data tutorial.\n\n"),
 
 		std::cout << toString();
-
+		std::cout << "Options:\n";
 		for (std::string it : BaseIntType::BaseIntMenu)
 		{
 			std::cout << it;
 		}
 		
 		std::cout << "Select option {" << std::to_string(QUIT) << "..." <<
-			std::to_string(ULLONG) << "}:  ";
+			std::to_string(ULLONG) << "}:               ";
 
 		std::cin >> id;
 		if (validateMinMax<int>(QUIT, ULLONG, id) == false)
@@ -136,43 +139,3 @@ C++ Integer Data tutorial. Menu selection: \n\n"),
 
 	return ret;
 }
-
-std::string BaseIntType::displayIntToStringHead() const
-{
-	char buffer[80]; 
-
-	std::fill(std::begin(buffer), std::end(buffer), ' ');
-	buffer[79] = 0;
-
-	memcpy(&buffer[headIntEtyOff.hdIntNameOff], "Name", strlen("Name"));
-	memcpy(&buffer[headIntEtyOff.hdIntValueOff], "Value", strlen("Value"));
-	memcpy(&buffer[headIntEtyOff.hdIntTypeOff], "Type", strlen("Type"));
-	strcpy(&buffer[headIntEtyOff.hdIntSizeOff], "Size");
-	strcat(buffer, "\n");
-
-	return string(buffer);
-}
-
-template <typename T> std::string displayIntValue(const std::string& name, const T& t)
-{
-	char buffer[80];
-
-	std::fill(std::begin(buffer), std::end(buffer), ' ');
-	buffer[79] = 0;
-
-	std::string tValue = std::to_string(t);
-	std::string tType = getTypeAsString<T>(t);
-	std::string len = std::to_string(sizeof(T));
-
-	memcpy(&buffer[headIntEtyOff.hdIntNameOff], name.c_str(), name.size());
-	memcpy(&buffer[headIntEtyOff.hdIntValueOff], tValue.c_str(), tValue.size());
-	memcpy(&buffer[headIntEtyOff.hdIntTypeOff], tType.c_str(), tType.size());
-	strcpy(&buffer[headIntEtyOff.hdIntSizeOff], len.c_str());
-	strcat(buffer, "\n");
-
-	return buffer;
-}
-
-template std::string displayIntValue<unsigned short>(const std::string& name, 
-																	const unsigned short& t);
-template std::string displayIntValue<short>(const std::string& name, const short& t);
