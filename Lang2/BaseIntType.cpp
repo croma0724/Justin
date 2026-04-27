@@ -29,8 +29,8 @@ static const HeadIntEntryOff_s headIntEtyOff;
 
 BaseIntType::BaseIntType(IntDataType_t& t) : baseInt(t)
 {}
- 
-std::string BaseIntType::toString() const 
+
+std::string BaseIntType::toString() const
 {
 	ostringstream os;
 

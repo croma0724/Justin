@@ -1,6 +1,6 @@
 /******************************************************************************
 *
-* Console.cpp : process user commands
+* BaseDataType.cpp : process user commands
 *
 ******************************************************************************/
 #include <iostream>
@@ -10,8 +10,8 @@
 #include <thread>
 #include "BaseDataType.h"
 #include "BaseIntType.h" 
-#include "DataTypeIf.h" 
-#include "Helper.inc"  
+#include "DataTypeIf.h"
+#include "Helper.inc"
 
 const vector<std::string> BaseDataType::DataTypeMenuStr = {
 	string("**************************************\n\tC++ \

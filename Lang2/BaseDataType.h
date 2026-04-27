@@ -1,7 +1,6 @@
 /******************************************************************************
 *
 * BaseDataType.h : data types definitions
-* 
 *
 ******************************************************************************/
 #ifndef __BASEDATATYPE_H__
@@ -10,7 +9,7 @@
 #include <string>
 #include <vector>
 using namespace std;
- 
+
 class BaseDataType {
 public:
 	typedef enum DataTypeMenu {
@@ -22,26 +21,25 @@ public:
 		STRING_DTMENU,				// 5
 		INVALID
 	} DTMenu_t;
-	 
+
 public:
 	BaseDataType();
 	 
 	// processBasicDataTypeMenu: display basic data type menu and execute selected 
 	//		command.
-	// @return: void, by QUIT command 
-	// 
+	// @return: void, by QUIT command
+	//
 	void processBasicDataTypeMenu();
 
 protected:
- 
+
 private:
 	// displayBDTMenu: display object main menu with list of supported 
 	//		commands
-	// 
+	//
 	DTMenu_t displayBDTMenu() const;
 
 	static const vector<std::string> DataTypeMenuStr;
 
 };
-
 #endif
