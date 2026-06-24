@@ -35,6 +35,12 @@ public:
 		INVALID
 	} IntType_e;
 
+	typedef enum Base {
+		DECIMAL = 0,
+		HEX,
+		BINARY
+	} Base_e;
+
 public:
 	BaseIntType(IntDataType_t& t);
 
@@ -64,6 +70,8 @@ private:
 	// Integer data type 
 	IntDataType_t& baseInt;
 
+	Base_e base;
+
 	// displayBaseIntMenu: retrieve user command for Base Int Menu, as defined 
 	//		by BaseIntMenu, always a valid cmd. 
 	//     	
@@ -88,6 +96,8 @@ public:
 	static const IntOff intOff;
 
 public:
+	HelperIntType() {}
+
 	// displayIntOpt:  header for displaying int info
 	//    "    Name      Value           Type      Size"
 	// 
@@ -105,6 +115,19 @@ public:
 	// @return:  <T> as string
 	//
 	static std::string getIntTypeAsString(T t = 0);
+
+	// readInt: read int from console. 
+	//     Display curent value and read the new one
+	// @input: current value
+	// @return: true: <t> vas updated
+	//				false: no updates, entered "Q/q".
+	static bool readInt(T& t);
+
+	static void setBase(int b);
+	static std::string getBase();
+
+protected:
+		static std::string convertToBase(const T& t);
 };
 
 #endif

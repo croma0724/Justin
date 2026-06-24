@@ -51,7 +51,6 @@ std::string HelperIntType<T>::displayIntValue(const std::string& name, const T& 
 	return buffer;
 }
 
-
 template <typename T>
 std::string HelperIntType<T>::getIntTypeAsString(T t)
 {
@@ -83,4 +82,24 @@ std::string HelperIntType<T>::getIntTypeAsString(T t)
 }
 
 
+template <typename T>
+bool HelperIntType<T>::readInt(T& t)
+{
+	std::ostringstream os;
+	//os << "Current value: << 
+
+	bool ret = false;
+
+	
+
+	return ret;	
+}
+
+/* AAAAAAA
+template <typename T>
+std::string HelperIntType<T>::convertToBase(const T& t, Base_e b)
+{
+	if (
+}
+*/
  

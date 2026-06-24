@@ -28,7 +28,7 @@ const vector<std::string> BaseIntType::BaseIntMenu = {
 static const HeadIntEntryOff_s headIntEtyOff;
 
 
-BaseIntType::BaseIntType(IntDataType_t& t) : baseInt(t)
+BaseIntType::BaseIntType(IntDataType_t& t) : baseInt(t), base(DECIMAL)
 {}
 
 std::string BaseIntType::toString() const

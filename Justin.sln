@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lang1", "Lang1\Lang1.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lang2", "Lang2\Lang2.vcxproj", "{98F5E15C-60F7-43E1-9E1D-97D94358D9D2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestInt", "TestInt\TestInt.vcxproj", "{BFDBD2F5-AF64-42C7-B669-247D99C3AFA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{98F5E15C-60F7-43E1-9E1D-97D94358D9D2}.Release|x64.Build.0 = Release|x64
 		{98F5E15C-60F7-43E1-9E1D-97D94358D9D2}.Release|x86.ActiveCfg = Release|Win32
 		{98F5E15C-60F7-43E1-9E1D-97D94358D9D2}.Release|x86.Build.0 = Release|Win32
+		{BFDBD2F5-AF64-42C7-B669-247D99C3AFA2}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{BFDBD2F5-AF64-42C7-B669-247D99C3AFA2}.Debug|Any CPU.Build.0 = Debug|x64
+		{BFDBD2F5-AF64-42C7-B669-247D99C3AFA2}.Debug|x64.ActiveCfg = Debug|x64
+		{BFDBD2F5-AF64-42C7-B669-247D99C3AFA2}.Debug|x64.Build.0 = Debug|x64
+		{BFDBD2F5-AF64-42C7-B669-247D99C3AFA2}.Debug|x86.ActiveCfg = Debug|Win32
+		{BFDBD2F5-AF64-42C7-B669-247D99C3AFA2}.Debug|x86.Build.0 = Debug|Win32
+		{BFDBD2F5-AF64-42C7-B669-247D99C3AFA2}.Release|Any CPU.ActiveCfg = Release|x64
+		{BFDBD2F5-AF64-42C7-B669-247D99C3AFA2}.Release|Any CPU.Build.0 = Release|x64
+		{BFDBD2F5-AF64-42C7-B669-247D99C3AFA2}.Release|x64.ActiveCfg = Release|x64
+		{BFDBD2F5-AF64-42C7-B669-247D99C3AFA2}.Release|x64.Build.0 = Release|x64
+		{BFDBD2F5-AF64-42C7-B669-247D99C3AFA2}.Release|x86.ActiveCfg = Release|Win32
+		{BFDBD2F5-AF64-42C7-B669-247D99C3AFA2}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
