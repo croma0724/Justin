@@ -248,7 +248,8 @@ std::string processULong()
 	nr = std::stoull(val);
 
 	// Validation against character limits
-	if ((nr >= ulLimit.minVal) && (nr <= ulLimit.maxVal))
+	if ((nr >= static_cast<unsigned long long> (ulLimit.minVal)) && 
+		 (nr <= static_cast<unsigned long long> (ulLimit.maxVal)))
 	{
 		// Valid
 		std::string tmp = convertAlignToString((long long&)nr, sizeof(unsigned int));

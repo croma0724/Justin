@@ -7,6 +7,7 @@
 #include <limits>
 #include <string>
 #include "TestInt.h"
+#include "TestCString.h"
 using namespace std;
 
 std::string intToHex(long long n);
@@ -17,6 +18,7 @@ std::string processULLong();
 
 int main()
 {
+#ifdef TESTINT
 	std::cout << processChar() << "\n";
 	std::cout << processUChar() << "\n";
 	std::cout << processShort() << "\n";
@@ -30,7 +32,11 @@ int main()
 
 	std::cout << processLLong();
 	std::cout << processULLong();
-	std::cout << std::endl;
+#endif 
+	 
+
+	std::cout << "\n\nTesting strings\n";
+	testCStringInit();
 }
 
 std::string processLLong()
