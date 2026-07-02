@@ -34,9 +34,9 @@ int main()
 	std::cout << processULLong();
 #endif 
 	 
-
 	std::cout << "\n\nTesting strings\n";
 	testCStringInit();
+	testCStringOper();
 }
 
 std::string processLLong()
