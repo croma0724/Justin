@@ -128,15 +128,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="TempFile.cpp" />
+    <ClCompile Include="TestCppString.cpp" />
     <ClCompile Include="TestCString.cpp" />
     <ClCompile Include="TestInt.cpp" />
+    <ClCompile Include="TestString.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TestInt.inc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="TestCppString.h" />
     <ClInclude Include="TestInt.h" />
     <ClInclude Include="TestCString.h" />
+    <ClInclude Include="TestString.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
